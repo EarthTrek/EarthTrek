@@ -63,7 +63,6 @@ SatelliteLayerView.prototype.showLayers = function (event) {
     var entity = event.data.entity;
     var panel = event.data.panel;
     $('.satellite-instrument .selected-instrument').removeClass('selected-instrument');
-    console.log(this)
     $(this).addClass("selected-instrument");
     $("#satellite-instrument-layers").empty();
     $.each(entity.properties.instruments.getValue(), function(key, instrument) {
