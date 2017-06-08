@@ -11,6 +11,7 @@ var ImagerySplitDirection = require('cesium/Source/Scene/ImagerySplitDirection')
 var datepicker = require('bootstrap-datepicker');
 var earthTrekLayer = require('./earthtrek-layer');
 
+require('../css/compare.css');
 'use strict';
 
 /**

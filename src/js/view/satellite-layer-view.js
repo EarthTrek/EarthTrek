@@ -14,6 +14,7 @@ var JulianDate = require('cesium/Source/Core/JulianDate');
 var provider = require('../earthtrek-provider');
 var earthTrekLayer = require('../earthtrek-layer');
 var EarthTrekCompare = require('../earthtrek-compare');
+var EarthTrekLayersView = require('./earthtrek-layers-view');
 
 require('bootstrap/dist/css/bootstrap.min.css');
 require('bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css');
@@ -21,6 +22,11 @@ require('bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css');
 function SatelliteLayerView(viewer, options) {
     this.viewer = viewer;
     this.earthTrekCompare = new EarthTrekCompare(viewer);
+
+    this.layersView = new EarthTrekLayersView(
+        this.viewer,
+        {containerId: '#layers-panel'}
+    );
 
 }
 
@@ -73,6 +79,7 @@ SatelliteLayerView.prototype.showLayers = function (event) {
             });
         }
     });
+
 }
 /**
  *
@@ -151,9 +158,13 @@ SatelliteLayerView.prototype.addToggleLayerButton = function(layer) {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
             earthTrekLayer.removeLayer(layer);
+            //TODO - ADD LISTENER
+            that.layersView.render();
         } else {
             $(this).addClass('selected');
             earthTrekLayer.addLayer(that.isoDate(that.viewer.clock.currentTime.toString()), layer);
+            //TODO - ADD LISTENER
+            that.layersView.render(layer);
         }
 
     });

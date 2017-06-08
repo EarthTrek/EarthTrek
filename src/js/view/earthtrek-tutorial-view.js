@@ -6,6 +6,7 @@
  * @description EarthTrek - NASA Space Apps 2017 28 MAY 2017.
  */
 
+require('../../css/tutorial.css');
 var Cesium = require('../cesium');
 /**
  * @param options

@@ -49,6 +49,7 @@ earthTrekLayer.toggleLayer = function() {
 earthTrekLayer.removeLayer = function(layer) {
     var imageryLayers = earthTrekLayer.getLayers();
     if (layer instanceof ImageryLayer) {
+        console.log('Remover', layer)
         imageryLayers.remove(layer);
         return true;
     }
