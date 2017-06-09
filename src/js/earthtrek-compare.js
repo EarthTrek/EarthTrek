@@ -11,6 +11,8 @@ var ImagerySplitDirection = require('cesium/Source/Scene/ImagerySplitDirection')
 var datepicker = require('bootstrap-datepicker');
 var earthTrekLayer = require('./earthtrek-layer');
 
+var earthTrekUtils = require('./utils/earthtrek-utils');
+
 require('../css/compare.css');
 'use strict';
 
@@ -29,7 +31,7 @@ function EarthTrekCompare(viewer) {
  */
 EarthTrekCompare.prototype.showCompare = function (layer) {
     var that = this;
-    var today = that.isoDate(that.viewer.clock.currentTime.toString());
+    var today = earthTrekUtils.isoDate(that.viewer.clock.currentTime.toString());
 
     $('#compare-layer-name').html(layer.title);
 
@@ -55,7 +57,7 @@ EarthTrekCompare.prototype.showCompare = function (layer) {
 
     $("#accept-date").click(function () {
         if ($('#compare-date').val()) {
-            var today = that.isoDate(that.viewer.clock.currentTime.toString());
+            var today = earthTrekUtils.isoDate(that.viewer.clock.currentTime.toString());
             layer.id = layer.id;
             layer.firstDate = $('#compare-date').val();
             layer.secondDate = today;
@@ -129,14 +131,5 @@ EarthTrekCompare.prototype.remove = function () {
     this.secondView.splitDirection =  ImageryLayer.DEFAULT_SPLIT;
     $('#compare-modal').hide();
 }
-
-/**
- *
- * @param isoDateTime
- * @returns {*}
- */
-EarthTrekCompare.prototype.isoDate = function(isoDateTime) {
-    return isoDateTime.split("T")[0];
-};
 
 module.exports = EarthTrekCompare;

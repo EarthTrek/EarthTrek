@@ -25,7 +25,7 @@ satellitePropagation.propagate = function(tleLine1, tleLine2, date) {
 }
 
 /**
- * Get Velocity in KM
+ * Get Velocity in KM/s
  * @returns {number}
  */
 satellitePropagation.getVelocity = function(velocityEci) {

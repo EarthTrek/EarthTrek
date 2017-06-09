@@ -7,7 +7,7 @@
  */
 
 require('../../css/tutorial.css');
-var Cesium = require('../cesium');
+var Cesium = require('../utils/cesium');
 /**
  * @param options
  * @constructor

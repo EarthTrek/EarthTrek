@@ -10,6 +10,7 @@ var $ = require('jquery');
 var moment = require('moment');
 var bootstrap = require('bootstrap');
 var JulianDate = require('cesium/Source/Core/JulianDate');
+var earthTrekUtils = require('../utils/earthtrek-utils');
 
 var provider = require('../earthtrek-provider');
 var earthTrekLayer = require('../earthtrek-layer');
@@ -149,7 +150,7 @@ SatelliteLayerView.prototype.addAvailabilityButtons = function(layer) {
  */
 SatelliteLayerView.prototype.addToggleLayerButton = function(layer) {
     var that = this;
-    var today = this.isoDate(that.viewer.clock.currentTime.toString());
+    var today = earthTrekUtils.isoDate(that.viewer.clock.currentTime.toString());
     var objToday = new Date(today);
     objToday.setDate(objToday.getDate());
     var toggleLayerButton = document.createElement("button");
@@ -162,7 +163,7 @@ SatelliteLayerView.prototype.addToggleLayerButton = function(layer) {
             that.layersView.render();
         } else {
             $(this).addClass('selected');
-            earthTrekLayer.addLayer(that.isoDate(that.viewer.clock.currentTime.toString()), layer);
+            earthTrekLayer.addLayer(earthTrekUtils.isoDate(that.viewer.clock.currentTime.toString()), layer);
             //TODO - ADD LISTENER
             that.layersView.render(layer);
         }
@@ -182,7 +183,7 @@ SatelliteLayerView.prototype.addToggleLayerButton = function(layer) {
  */
 SatelliteLayerView.prototype.addCompareButton = function(layer) {
     var that = this;
-    var today = this.isoDate(that.viewer.clock.currentTime.toString());
+    var today = earthTrekUtils.isoDate(that.viewer.clock.currentTime.toString());
     var compareButton = document.createElement("button");
     $(compareButton).attr('id', 'layer-compare-' + layer.id);
     $(compareButton).click(function () {
@@ -202,12 +203,5 @@ SatelliteLayerView.prototype.addCompareButton = function(layer) {
     return compareButton;
 };
 
-/**
- *
- * @param isoDateTime
- * @returns {*}
- */
-SatelliteLayerView.prototype.isoDate = function(isoDateTime) {
-    return isoDateTime.split("T")[0];
-};
+
 module.exports = SatelliteLayerView;
