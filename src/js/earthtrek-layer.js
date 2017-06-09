@@ -12,8 +12,17 @@ var earthTrekLayer = earthTrekLayer || {};
 
 earthTrekLayer.setViewer = function(viewer) {
     this.layerViewer = viewer;
-}
 
+    this.renderLayersEvent = new Cesium.Event();
+    this.renderLayersEvent.addEventListener(this.layersView.render, this.layersView);
+}
+/**
+ * Add Layer
+ * @param today
+ * @param layer
+ * @param dontHide
+ * @returns {ImageryLayer}
+ */
 earthTrekLayer.addLayer = function(today, layer, dontHide) {
     if (dontHide === undefined) {
         earthTrekLayer.hideLayer(layer);
@@ -46,6 +55,11 @@ earthTrekLayer.getLayers = function() {
 earthTrekLayer.toggleLayer = function() {
 }
 
+/**
+ * Remove Layer
+ * @param layer
+ * @returns {boolean}
+ */
 earthTrekLayer.removeLayer = function(layer) {
     var imageryLayers = earthTrekLayer.getLayers();
     if (layer instanceof ImageryLayer) {
@@ -62,6 +76,10 @@ earthTrekLayer.removeLayer = function(layer) {
     return false;
 }
 
+/**
+ * Hide Layer
+ * @param layer
+ */
 earthTrekLayer.hideLayer = function(layer) {
     var imageryLayers = earthTrekLayer.getLayers();
     for (var i = 0; i <= imageryLayers.length - 1; i++) {

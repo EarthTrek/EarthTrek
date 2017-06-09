@@ -11,6 +11,7 @@ var moment = require('moment');
 var bootstrap = require('bootstrap');
 var JulianDate = require('cesium/Source/Core/JulianDate');
 var earthTrekUtils = require('../utils/earthtrek-utils');
+var Cesium = require('../utils/cesium');
 
 var provider = require('../earthtrek-provider');
 var earthTrekLayer = require('../earthtrek-layer');
@@ -28,7 +29,6 @@ function SatelliteLayerView(viewer, options) {
         this.viewer,
         {containerId: '#layers-panel'}
     );
-
 }
 
 /**
@@ -159,12 +159,10 @@ SatelliteLayerView.prototype.addToggleLayerButton = function(layer) {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
             earthTrekLayer.removeLayer(layer);
-            //TODO - ADD LISTENER
             that.layersView.render();
         } else {
             $(this).addClass('selected');
             earthTrekLayer.addLayer(earthTrekUtils.isoDate(that.viewer.clock.currentTime.toString()), layer);
-            //TODO - ADD LISTENER
             that.layersView.render(layer);
         }
 

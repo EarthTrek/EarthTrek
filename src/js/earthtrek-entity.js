@@ -26,23 +26,18 @@ var PolylineGlowMaterialProperty =require('cesium/Source/DataSources/PolylineGlo
 /**EarthTrek*/
 var earthTrekSatellite = require('./earthtrek-satellite');
 var EarthTrekEntity = EarthTrekEntity || {};
-/*
-function EarthTrekEntity(options) {
-    this.orbitDuration = options.orbitDuration;
-    this.frequency = options.frequency;
-}*/
+
 
 /**
- *
+ * Create Entity
  * @param satelliteInfo
  * @param startTime
- * @returns {Cesium.Entity}
+ * @param options
+ * @returns {*}
  */
 EarthTrekEntity.create = function (satelliteInfo, startTime, options) {
-
     this.orbitDuration = options.orbitDuration;
     this.frequency = options.frequency;
-    var color;
     if (satelliteInfo.tle == undefined) {
         return false;
     }
@@ -74,8 +69,6 @@ EarthTrekEntity.create = function (satelliteInfo, startTime, options) {
             scale: 0.6,
             scaleByDistance: new NearFarScalar(0, 1.5, 15.0e6, 0.85),
             fillColor: Color.WHITE,
-            // eyeOffset: new Cesium.Cartesian3(0.0, 300.0, 200.0),
-            outlineColor: color,
             outlineWidth: 3,
             style: LabelStyle.FILL,
             horizontalOrigin: HorizontalOrigin.LEFT,
@@ -84,7 +77,6 @@ EarthTrekEntity.create = function (satelliteInfo, startTime, options) {
         },
         billboard: {
             imageSubRegion: new BoundingRectangle(0, 0, 80, 80),
-            //   image: 'images/satellites/test.png',
             image: 'images/satellites/' + satelliteInfo.image,
             distanceDisplayCondition: new DistanceDisplayCondition(40000.1, 150000000.0),
             scale: 0.35,
